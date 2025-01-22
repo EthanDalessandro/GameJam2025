@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class LevivatingBubble : MonoBehaviour
+public class NormalBubble : MonoBehaviour
 {
     private Rigidbody rb;
 
@@ -23,14 +22,6 @@ public class LevivatingBubble : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.GetComponent<BubbleInteraction>() != null)
-        {
-            collision.collider.GetComponent<BubbleInteraction>().Hit(projectileDamage);
-            Destroy(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 }

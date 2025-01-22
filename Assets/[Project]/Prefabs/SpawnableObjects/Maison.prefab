@@ -146,7 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7583972a0f51b4744993a628457f60d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tresholdToLevitate: 5
+  tresholdToLevitate: 0
+  levitationForce: 5
   curve:
     serializedVersion: 2
     m_Curve:

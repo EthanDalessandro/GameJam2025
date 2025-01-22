@@ -7,6 +7,7 @@ public class BubbleInteraction : MonoBehaviour
     private bool isLevitating;
 
     public float tresholdToLevitate;
+    public float levitationForce;
     private float actualAmount;
 
     public AnimationCurve curve;
@@ -17,7 +18,7 @@ public class BubbleInteraction : MonoBehaviour
         isLevitating = false;
     }
 
-    public void GetHit(float amount)
+    public void Hit(float amount)
     {
         if (!isLevitating)
         {
@@ -36,7 +37,7 @@ public class BubbleInteraction : MonoBehaviour
         {
             Vector3 move = new Vector3(0,1,0);
             move.y = curve.Evaluate(Time.time);
-            rb.velocity = new Vector3(rb.velocity.x, move.y, rb.velocity.z);
+            rb.velocity = new Vector3(rb.velocity.x, move.y * levitationForce, rb.velocity.z);
         }
     }
 }
