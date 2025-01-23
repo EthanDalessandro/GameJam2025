@@ -119,11 +119,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9c182dcc7d48204281064373358ffff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 50
+  projectileSpeed: 5
   projectileDamage: 1
   lifetime: 3
   currentFuel: 0
-  bubbleFuel: {fileID: 11400000, guid: 48565de3550412843a937922ddcee84c, type: 2}
+  bubbleFuel: 0
 --- !u!54 &6524024477377423026
 Rigidbody:
   m_ObjectHideFlags: 0
