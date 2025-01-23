@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,12 +16,7 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 forwardMovement = transform.forward * moveDirection.y;
-        Vector3 sideMovement = transform.right * moveDirection.x;
-
-        Vector3 move = (forwardMovement + sideMovement).normalized * moveSpeed;
-
-        rb.velocity = new Vector3(move.x, rb.velocity.y, move.z);
+        rb.velocity = new Vector3(moveDirection.x * moveSpeed, 0, moveDirection.y * moveSpeed);
     }
 
     public void OnPlayerMove(InputAction.CallbackContext context)

@@ -11,8 +11,8 @@ public class PlayerShoot : MonoBehaviour
     private bool isShooting;
     private bool normalBubbleMode = true;
 
-    [Range(0, 0.20f)] public float normalShootCost;
-    [Range(0, 0.20f)] public float levitatingShootCost;
+    [Range(0, 10f)] public float normalShootCost;
+    [Range(0, 10f)] public float levitatingShootCost;
 
     public SOLFloatValue bubbleFuel;
 

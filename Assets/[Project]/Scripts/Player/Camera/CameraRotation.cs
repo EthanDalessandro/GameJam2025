@@ -3,47 +3,28 @@ using UnityEngine.InputSystem;
 
 public class CameraRotation : MonoBehaviour
 {
-    public Transform head;
-    public Vector2 clampHeadRotation; // Min et max en degrés
+    private Rigidbody rb;
+
     public float rotateSpeed;
 
-    private Vector2 rotateDirection;
+    public Vector2 directionToLookAt;
+    public Vector2 deadzone;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     private void Update()
     {
-        // Rotation du corps
-        transform.localEulerAngles += new Vector3(0, rotateDirection.x * rotateSpeed, 0);
-
-        // Rotation de la tête
-        Vector3 headEulerAngles = head.localEulerAngles;
-
-        // Ajuster l'angle X de la tête (pitch) avec le clamp
-        headEulerAngles.x -= rotateDirection.y * rotateSpeed / 2;
-        headEulerAngles.x = ClampAngle(headEulerAngles.x, clampHeadRotation.x, clampHeadRotation.y);
-
-        // Appliquer la rotation clampée
-        head.localEulerAngles = headEulerAngles;
+        transform.LookAt(new Vector3(directionToLookAt.x, 0, directionToLookAt.y) + transform.position, Vector3.up);
     }
 
-    public void OnRotateCamera(InputAction.CallbackContext context)
+    public void OnCameraRotation(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            rotateDirection = context.ReadValue<Vector2>();
+            directionToLookAt = context.ReadValue<Vector2>();
         }
-        else
-        {
-            rotateDirection = Vector2.zero;
-        }
-    }
-
-    // Fonction pour clamping des angles entre -180 et 180 degrés
-    private float ClampAngle(float angle, float min, float max)
-    {
-        angle = angle % 360;
-        if (angle < -180) angle += 360;
-        if (angle > 180) angle -= 360;
-
-        return Mathf.Clamp(angle, min, max);
     }
 }
