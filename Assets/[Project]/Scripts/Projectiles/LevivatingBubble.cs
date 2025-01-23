@@ -13,12 +13,12 @@ public class LevivatingBubble : MonoBehaviour
 
     public float currentFuel;
 
-    public SOLFloatValue bubbleFuel;
+    public float bubbleFuel;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        currentFuel = bubbleFuel.Value;
+        currentFuel = bubbleFuel;
     }
 
     private void FixedUpdate()
@@ -47,5 +47,10 @@ public class LevivatingBubble : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void SetFuel(float fuel)
+    {
+        bubbleFuel = fuel;
     }
 }

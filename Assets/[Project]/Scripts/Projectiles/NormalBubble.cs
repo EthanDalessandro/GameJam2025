@@ -12,12 +12,12 @@ public class NormalBubble : MonoBehaviour
     public float lifetime;
     private float currentLifetime;
 
-    public SOLFloatValue bubbleFuel;
+    private float bubbleFuel;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        currentFuel = bubbleFuel.Value;
+        currentFuel = bubbleFuel;
     }
 
     private void FixedUpdate()
@@ -48,5 +48,15 @@ public class NormalBubble : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void SetFuel(float fuel)
+    {
+        bubbleFuel = fuel;
+    }
+    public void SetScale(float scale)
+    {
+        transform.GetComponent<SphereCollider>().radius *= scale;
+        transform.localScale *= scale;
     }
 }

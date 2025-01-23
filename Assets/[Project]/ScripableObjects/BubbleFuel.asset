@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5194d203d8fca544b4902318c594136, type: 3}
   m_Name: BubbleFuel
   m_EditorClassIdentifier: 
-  Value: 50
+  Value: 101.4
