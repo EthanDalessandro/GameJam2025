@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 263644534683185864}
   - component: {fileID: 3268715624668654860}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Kayou
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
