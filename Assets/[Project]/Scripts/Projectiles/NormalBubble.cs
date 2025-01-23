@@ -32,7 +32,7 @@ public class NormalBubble : MonoBehaviour
         }
 
         rb.AddForce(transform.forward * (projectileSpeed * currentFuel), ForceMode.Force);
-        rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y / (projectileSpeed) + 200, rb.velocity.z) * Time.fixedDeltaTime;
+        rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y / (projectileSpeed) + 25, rb.velocity.z) * Time.fixedDeltaTime;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -54,6 +54,7 @@ public class NormalBubble : MonoBehaviour
     {
         bubbleFuel = fuel;
     }
+
     public void SetScale(float scale)
     {
         transform.GetComponent<SphereCollider>().radius *= scale;

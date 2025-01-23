@@ -16,8 +16,7 @@ public class PlayerShoot : MonoBehaviour
 
     [Range(0, 10f)] public float normalShootCost;
     [Range(0, 10f)] public float levitatingShootCost;
-
-    [Range(0, 10f)] public float chargingForce;
+    public float chargingForce;
 
     public BubbleFuel bubbleFuel;
 
@@ -32,7 +31,8 @@ public class PlayerShoot : MonoBehaviour
     {
         bubbleFuel = GetComponent<BubbleFuel>();
 
-        canNormalShoot = true; 
+        isChargingBubble = false;
+        canNormalShoot = true;
         canLevitatingShoot = true;
     }
 
@@ -42,14 +42,14 @@ public class PlayerShoot : MonoBehaviour
         {
             if (bubbleFuel.bubbleFuel > 0)
             {
-                if(!isChargingBubble)
+                if (!isChargingBubble)
                 {
                     if (normalBubbleMode && canNormalShoot)
                     {
                         StartCoroutine(normalShoot(timeBetweenShootCooldown));
                         bubbleFuel.bubbleFuel -= normalShootCost;
                     }
-                    if(!normalBubbleMode && canLevitatingShoot)
+                    if (!normalBubbleMode && canLevitatingShoot)
                     {
                         StartCoroutine(levitatingShoot(levitatingShootCooldown));
                         bubbleFuel.bubbleFuel -= levitatingShootCost;
@@ -59,18 +59,24 @@ public class PlayerShoot : MonoBehaviour
                 {
                     chargingForce += Time.deltaTime;
 
-                    if(bubbleFuel.bubbleFuel <= 0)
+                    if (bubbleFuel.bubbleFuel <= 0)
                     {
-                        
+                        GameObject currentBigBubble = Instantiate(normalBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
+                        currentBigBubble.GetComponent<NormalBubble>().SetScale(chargingForce);
+                        isChargingBubble = false;
+                        chargingForce = 0;
                     }
                 }
             }
-        }
-        else
-        {
-            if(chargingForce > 0)
+            else
             {
-
+                if (chargingForce > 0)
+                {
+                    GameObject currentBigBubble = Instantiate(normalBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
+                    currentBigBubble.GetComponent<NormalBubble>().SetScale(chargingForce);
+                    isChargingBubble = false;
+                    chargingForce = 0;
+                }
             }
         }
     }
