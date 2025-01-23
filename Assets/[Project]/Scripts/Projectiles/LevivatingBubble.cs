@@ -13,12 +13,12 @@ public class LevivatingBubble : MonoBehaviour
 
     public float currentFuel;
 
-    public SOLFloatValue bubbleFuel;
+    public float bubbleFuel;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        currentFuel = bubbleFuel.Value;
+        currentFuel = bubbleFuel;
     }
 
     private void FixedUpdate()
@@ -33,7 +33,7 @@ public class LevivatingBubble : MonoBehaviour
         }
 
         rb.AddForce(transform.forward * (projectileSpeed * currentFuel), ForceMode.Force);
-        rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y / (projectileSpeed) + 200, rb.velocity.z) * Time.fixedDeltaTime;
+        rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y / (projectileSpeed) + 25, rb.velocity.z) * Time.fixedDeltaTime;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -47,5 +47,10 @@ public class LevivatingBubble : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void SetFuel(float fuel)
+    {
+        bubbleFuel = fuel;
     }
 }

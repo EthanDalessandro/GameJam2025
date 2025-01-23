@@ -4,11 +4,11 @@ public class PlayerHealth : MonoBehaviour
 {
     public float health;
 
-    public float shield;
+    public int shield;
 
     public void GetHit(float AmountTaken)
     {
-        if(shield > 0)
+        if (shield > 0)
         {
             shield -= 1;
         }
@@ -16,10 +16,15 @@ public class PlayerHealth : MonoBehaviour
         {
             health -= AmountTaken;
 
-            if(health < 0)
+            if (health < 0)
             {
                 Destroy(gameObject);
             }
         }
+    }
+
+    public void AddShield(int AmountTaken)
+    { 
+        shield += AmountTaken;
     }
 }

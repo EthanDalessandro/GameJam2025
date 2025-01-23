@@ -12,10 +12,13 @@ public class PlayerShoot : MonoBehaviour
     private bool isShooting;
     private bool normalBubbleMode = true;
 
+    private bool isChargingBubble = true;
+
     [Range(0, 10f)] public float normalShootCost;
     [Range(0, 10f)] public float levitatingShootCost;
+    public float chargingForce;
 
-    public SOLFloatValue bubbleFuel;
+    public BubbleFuel bubbleFuel;
 
     public float normalShootingCooldown;
     public float timeBetweenShootCooldown;
@@ -26,8 +29,10 @@ public class PlayerShoot : MonoBehaviour
 
     private void Awake()
     {
-        bubbleFuel.Value = 100;
-        canNormalShoot = true; 
+        bubbleFuel = GetComponent<BubbleFuel>();
+
+        isChargingBubble = false;
+        canNormalShoot = true;
         canLevitatingShoot = true;
     }
 
@@ -35,17 +40,42 @@ public class PlayerShoot : MonoBehaviour
     {
         if (isShooting)
         {
-            if (bubbleFuel.Value > 0)
+            if (bubbleFuel.bubbleFuel > 0)
             {
-                if (normalBubbleMode && canNormalShoot)
+                if (!isChargingBubble)
                 {
-                    StartCoroutine(normalShoot(timeBetweenShootCooldown));
-                    bubbleFuel.Value -= normalShootCost;
+                    if (normalBubbleMode && canNormalShoot)
+                    {
+                        StartCoroutine(normalShoot(timeBetweenShootCooldown));
+                        bubbleFuel.bubbleFuel -= normalShootCost;
+                    }
+                    if (!normalBubbleMode && canLevitatingShoot)
+                    {
+                        StartCoroutine(levitatingShoot(levitatingShootCooldown));
+                        bubbleFuel.bubbleFuel -= levitatingShootCost;
+                    }
                 }
-                if(!normalBubbleMode && canLevitatingShoot)
+                else
                 {
-                    StartCoroutine(levitatingShoot(levitatingShootCooldown));
-                    bubbleFuel.Value -= levitatingShootCost;
+                    chargingForce += Time.deltaTime;
+
+                    if (bubbleFuel.bubbleFuel <= 0)
+                    {
+                        GameObject currentBigBubble = Instantiate(normalBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
+                        currentBigBubble.GetComponent<NormalBubble>().SetScale(chargingForce);
+                        isChargingBubble = false;
+                        chargingForce = 0;
+                    }
+                }
+            }
+            else
+            {
+                if (chargingForce > 0)
+                {
+                    GameObject currentBigBubble = Instantiate(normalBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
+                    currentBigBubble.GetComponent<NormalBubble>().SetScale(chargingForce);
+                    isChargingBubble = false;
+                    chargingForce = 0;
                 }
             }
         }
@@ -75,13 +105,16 @@ public class PlayerShoot : MonoBehaviour
     {
         canNormalShoot = false;
 
-        Instantiate(normalBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
+        GameObject currentBubble = Instantiate(normalBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
+        currentBubble.GetComponent<NormalBubble>().SetFuel(bubbleFuel.bubbleFuel);
         yield return new WaitForSeconds(timeBetweenShoot);
 
-        Instantiate(normalBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
+        GameObject currentBubble1 = Instantiate(normalBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
+        currentBubble1.GetComponent<NormalBubble>().SetFuel(bubbleFuel.bubbleFuel);
         yield return new WaitForSeconds(timeBetweenShoot);
 
-        Instantiate(normalBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
+        GameObject currentBubble2 = Instantiate(normalBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
+        currentBubble2.GetComponent<NormalBubble>().SetFuel(bubbleFuel.bubbleFuel);
         yield return new WaitForSeconds(normalShootingCooldown);
 
         canNormalShoot = true;
@@ -90,8 +123,11 @@ public class PlayerShoot : MonoBehaviour
     public IEnumerator levitatingShoot(float timeBetweenShoot)
     {
         canLevitatingShoot = false;
-        Instantiate(levitatingBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
+
+        GameObject currentBubble = Instantiate(levitatingBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
+        currentBubble.GetComponent<LevivatingBubble>().SetFuel(bubbleFuel.bubbleFuel);
         yield return new WaitForSeconds(timeBetweenShoot);
+
         canLevitatingShoot = true;
     }
 }

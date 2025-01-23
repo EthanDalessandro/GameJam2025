@@ -146,7 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ecffce97a017cc4eb2ab17ffb4dc0e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 100
+  projectileSpeed: 7
   projectileDamage: 10
   lifetime: 3
-  bubbleFuel: {fileID: 11400000, guid: 48565de3550412843a937922ddcee84c, type: 2}
