@@ -122,37 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &25012542
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 25012543}
-  m_Layer: 0
-  m_Name: PlayerDirection
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &25012543
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 25012542}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1791334157}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &157207112
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,7 +276,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a7103205ebebec747a20f455fd8b9391, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -355,11 +324,6 @@ Transform:
 --- !u!1 &1791334151 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3024664410133558179, guid: 7656a29efd15768429eff76a0462d9a9, type: 3}
-  m_PrefabInstance: {fileID: 5104410821970767172}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1791334157 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 69371660914931839, guid: 7656a29efd15768429eff76a0462d9a9, type: 3}
   m_PrefabInstance: {fileID: 5104410821970767172}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1863304210
@@ -498,8 +462,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NotificationBehavior: 2
-  m_MaxPlayerCount: 4
+  m_NotificationBehavior: 0
+  m_MaxPlayerCount: -1
   m_AllowJoining: 1
   m_JoinBehavior: 0
   m_PlayerJoinedEvent:
@@ -511,7 +475,7 @@ MonoBehaviour:
   m_JoinAction:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Join
       m_Type: 0
       m_ExpectedControlType: 
       m_Id: 1f6ff40d-ec17-4422-a3fb-15eede687cd1
@@ -711,6 +675,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grid
       objectReference: {fileID: 0}
+    - target: {fileID: 6704525479652168195, guid: 0b7309f812d5c3d4c80ccc6343d71b6f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -787,15 +755,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 69371660914931839, guid: 7656a29efd15768429eff76a0462d9a9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.94
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 69371660914931839, guid: 7656a29efd15768429eff76a0462d9a9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.07
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 69371660914931839, guid: 7656a29efd15768429eff76a0462d9a9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -25.34
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 69371660914931839, guid: 7656a29efd15768429eff76a0462d9a9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -829,40 +797,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3483308063447619214, guid: 7656a29efd15768429eff76a0462d9a9, type: 3}
-      propertyPath: deadzone.x
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3483308063447619214, guid: 7656a29efd15768429eff76a0462d9a9, type: 3}
-      propertyPath: deadzone.y
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7430644501573188754, guid: 7656a29efd15768429eff76a0462d9a9, type: 3}
-      propertyPath: m_DefaultControlScheme
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7430644501573188754, guid: 7656a29efd15768429eff76a0462d9a9, type: 3}
-      propertyPath: m_NeverAutoSwitchControlSchemes
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7430644501573188754, guid: 7656a29efd15768429eff76a0462d9a9, type: 3}
-      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnCameraRotation
-      objectReference: {fileID: 0}
-    - target: {fileID: 7563797701415157275, guid: 7656a29efd15768429eff76a0462d9a9, type: 3}
-      propertyPath: normalShootCost
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7563797701415157275, guid: 7656a29efd15768429eff76a0462d9a9, type: 3}
-      propertyPath: levitatingShootCost
-      value: 7
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 69371660914931839, guid: 7656a29efd15768429eff76a0462d9a9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 25012543}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7656a29efd15768429eff76a0462d9a9, type: 3}
 --- !u!1001 &7269606152948763789

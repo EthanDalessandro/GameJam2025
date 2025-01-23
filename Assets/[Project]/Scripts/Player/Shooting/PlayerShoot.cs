@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,36 +17,35 @@ public class PlayerShoot : MonoBehaviour
 
     public SOLFloatValue bubbleFuel;
 
-    public float shootingCooldown;
-    private float shootCD;
+    public float normalShootingCooldown;
+    public float timeBetweenShootCooldown;
+    private bool canNormalShoot;
+
+    public float levitatingShootCooldown;
+    private bool canLevitatingShoot;
 
     private void Awake()
     {
         bubbleFuel.Value = 100;
+        canNormalShoot = true; 
+        canLevitatingShoot = true;
     }
 
     private void Update()
     {
-        if (shootCD <= shootingCooldown)
+        if (isShooting)
         {
-            shootCD += Time.deltaTime;
-        }
-
-        if (isShooting && shootCD >= shootingCooldown)
-        {
-            shootCD = 0;
-
             if (bubbleFuel.Value > 0)
             {
-                if (normalBubbleMode)
+                if (normalBubbleMode && canNormalShoot)
                 {
+                    StartCoroutine(normalShoot(timeBetweenShootCooldown));
                     bubbleFuel.Value -= normalShootCost;
-                    GameObject currentBubble = Instantiate(normalBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
                 }
-                else
+                if(!normalBubbleMode && canLevitatingShoot)
                 {
+                    StartCoroutine(levitatingShoot(levitatingShootCooldown));
                     bubbleFuel.Value -= levitatingShootCost;
-                    GameObject currentBubble = Instantiate(levitatingBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
                 }
             }
         }
@@ -69,5 +69,29 @@ public class PlayerShoot : MonoBehaviour
         {
             normalBubbleMode = !normalBubbleMode;
         }
+    }
+
+    public IEnumerator normalShoot(float timeBetweenShoot)
+    {
+        canNormalShoot = false;
+
+        Instantiate(normalBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
+        yield return new WaitForSeconds(timeBetweenShoot);
+
+        Instantiate(normalBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
+        yield return new WaitForSeconds(timeBetweenShoot);
+
+        Instantiate(normalBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
+        yield return new WaitForSeconds(normalShootingCooldown);
+
+        canNormalShoot = true;
+    }
+
+    public IEnumerator levitatingShoot(float timeBetweenShoot)
+    {
+        canLevitatingShoot = false;
+        Instantiate(levitatingBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
+        yield return new WaitForSeconds(timeBetweenShoot);
+        canLevitatingShoot = true;
     }
 }

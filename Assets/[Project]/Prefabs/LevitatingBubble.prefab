@@ -121,6 +121,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileSpeed: 50
   projectileDamage: 1
+  lifetime: 3
+  currentFuel: 0
   bubbleFuel: {fileID: 11400000, guid: 48565de3550412843a937922ddcee84c, type: 2}
 --- !u!54 &6524024477377423026
 Rigidbody:
