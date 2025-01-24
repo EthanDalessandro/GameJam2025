@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BubbleInteraction : MonoBehaviour
 {
+    public GameObject bubbleVisual;
     private Rigidbody rb;
 
     private bool isLevitating;
@@ -14,6 +15,7 @@ public class BubbleInteraction : MonoBehaviour
 
     private void Awake()
     {
+        bubbleVisual.SetActive(false);
         rb = GetComponent<Rigidbody>();
         isLevitating = false;
     }
@@ -27,6 +29,7 @@ public class BubbleInteraction : MonoBehaviour
             if (actualAmount > tresholdToLevitate)
             {
                 isLevitating = true;
+                bubbleVisual.SetActive(true);
             }
         }
     }
