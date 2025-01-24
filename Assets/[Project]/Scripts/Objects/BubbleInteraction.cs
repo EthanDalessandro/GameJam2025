@@ -24,7 +24,7 @@ public class BubbleInteraction : MonoBehaviour
         {
             actualAmount += amount;
 
-            if(actualAmount > tresholdToLevitate)
+            if (actualAmount > tresholdToLevitate)
             {
                 isLevitating = true;
             }
@@ -33,9 +33,9 @@ public class BubbleInteraction : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(isLevitating)
+        if (isLevitating)
         {
-            Vector3 move = new Vector3(0,1,0);
+            Vector3 move = new Vector3(0, 1, 0);
             move.y = curve.Evaluate(Time.time);
             rb.velocity = new Vector3(rb.velocity.x, move.y * levitationForce, rb.velocity.z);
         }

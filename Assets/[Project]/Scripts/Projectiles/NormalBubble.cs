@@ -22,7 +22,7 @@ public class NormalBubble : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(currentLifetime > lifetime)
+        if (currentLifetime > lifetime)
         {
             Destroy(gameObject);
         }
@@ -37,14 +37,14 @@ public class NormalBubble : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.CompareTag("Player"))
+        if (collision.collider.CompareTag("Player"))
         {
-            if(collision.collider.GetComponent<PlayerHealth>() != null)
+            if (collision.collider.GetComponent<PlayerHealth>() != null)
             {
                 collision.collider.GetComponent<PlayerHealth>().GetHit(projectileDamage);
             }
         }
-        if(collision.collider.CompareTag("Obstacle"))
+        if (collision.collider.CompareTag("Obstacle"))
         {
             Destroy(gameObject);
         }

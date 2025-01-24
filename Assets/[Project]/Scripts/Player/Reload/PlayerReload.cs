@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,7 +19,7 @@ public class PlayerReload : MonoBehaviour
 
     public void OnReload(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if (context.performed)
         {
             currentStickPosition = context.ReadValue<Vector2>();
             IsGoalReached();
@@ -27,9 +28,9 @@ public class PlayerReload : MonoBehaviour
 
     public void IsGoalReached()
     {
-        if(isStickUp)
+        if (isStickUp)
         {
-            if(currentStickPosition.y < -0.5f)
+            if (currentStickPosition.y < -0.5f)
             {
                 GainFuel();
                 isStickUp = false;
@@ -37,7 +38,7 @@ public class PlayerReload : MonoBehaviour
         }
         else
         {
-            if(currentStickPosition.y > 0.5f)
+            if (currentStickPosition.y > 0.5f)
             {
                 GainFuel();
                 isStickUp = true;
@@ -47,9 +48,11 @@ public class PlayerReload : MonoBehaviour
 
     public void GainFuel()
     {
-        if(bubbleFuel.bubbleFuel < 101)
+        if (bubbleFuel.bubbleFuel < 101)
         {
             bubbleFuel.bubbleFuel += fuelAddedPerReload;
+            bubbleFuel.Animator.Play(bubbleFuel.clip.name);
+            DOTween.To(() => bubbleFuel.visual.fillAmount, x => bubbleFuel.visual.fillAmount = x, bubbleFuel.bubbleFuel / 100f, 0.5f);
         }
     }
 }

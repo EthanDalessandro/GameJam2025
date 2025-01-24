@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -115,6 +116,7 @@ public class PlayerShoot : MonoBehaviour
 
         GameObject currentBubble2 = Instantiate(normalBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
         currentBubble2.GetComponent<NormalBubble>().SetFuel(bubbleFuel.bubbleFuel);
+        DOTween.To(() => bubbleFuel.visual.fillAmount, x => bubbleFuel.visual.fillAmount = x, bubbleFuel.bubbleFuel / 100f, 0.5f);
         yield return new WaitForSeconds(normalShootingCooldown);
 
         canNormalShoot = true;
@@ -126,6 +128,7 @@ public class PlayerShoot : MonoBehaviour
 
         GameObject currentBubble = Instantiate(levitatingBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
         currentBubble.GetComponent<LevivatingBubble>().SetFuel(bubbleFuel.bubbleFuel);
+        DOTween.To(() => bubbleFuel.visual.fillAmount, x => bubbleFuel.visual.fillAmount = x, bubbleFuel.bubbleFuel / 100f, 0.5f);
         yield return new WaitForSeconds(timeBetweenShoot);
 
         canLevitatingShoot = true;
