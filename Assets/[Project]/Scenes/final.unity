@@ -179,7 +179,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 832755031afcec7499e93f15e306fe3e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1950,6 +1950,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2841175209817194873, guid: 738c14ec20a116d43a5c7d9526c208d1, type: 3}
+      propertyPath: playerSkinBack
+      value: 
+      objectReference: {fileID: 7300654563260371617}
+    - target: {fileID: 2841175209817194873, guid: 738c14ec20a116d43a5c7d9526c208d1, type: 3}
+      propertyPath: playerSkinFront
+      value: 
+      objectReference: {fileID: 7300654563260371616}
     - target: {fileID: 7264151700332868908, guid: 738c14ec20a116d43a5c7d9526c208d1, type: 3}
       propertyPath: m_Name
       value: Player 2 Pack
@@ -1959,6 +1967,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 738c14ec20a116d43a5c7d9526c208d1, type: 3}
+--- !u!1 &7300654563260371616 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9047246711604729573, guid: 738c14ec20a116d43a5c7d9526c208d1, type: 3}
+  m_PrefabInstance: {fileID: 7300654563260371615}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7300654563260371617 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4940361918605385595, guid: 738c14ec20a116d43a5c7d9526c208d1, type: 3}
+  m_PrefabInstance: {fileID: 7300654563260371615}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
