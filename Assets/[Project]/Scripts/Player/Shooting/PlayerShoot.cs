@@ -59,26 +59,28 @@ public class PlayerShoot : MonoBehaviour
                 else
                 {
                     chargingForce += Time.deltaTime;
+                    bubbleFuel.bubbleFuel -= Time.deltaTime; 
 
-                    if (bubbleFuel.bubbleFuel <= 0)
+                    if (bubbleFuel.bubbleFuel <= 0 || chargingForce >= 10)
                     {
                         GameObject currentBigBubble = Instantiate(normalBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
-                        currentBigBubble.GetComponent<NormalBubble>().SetScale(chargingForce);
+                        currentBigBubble.GetComponent<NormalBubble>().SetScale(chargingForce / 2);
                         isChargingBubble = false;
                         chargingForce = 0;
                     }
                 }
             }
-            else
+        }
+        else
+        {
+            if (chargingForce > 0.2f)
             {
-                if (chargingForce > 0)
-                {
-                    GameObject currentBigBubble = Instantiate(normalBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
-                    currentBigBubble.GetComponent<NormalBubble>().SetScale(chargingForce);
-                    isChargingBubble = false;
-                    chargingForce = 0;
-                }
+                GameObject currentBigBubble = Instantiate(normalBubblePrefab, bubbleSpawnTransform.position, transform.rotation);
+                currentBigBubble.GetComponent<NormalBubble>().SetScale(chargingForce / 2);
+                isChargingBubble = false;
+                chargingForce = 0;
             }
+
         }
     }
 
@@ -132,5 +134,10 @@ public class PlayerShoot : MonoBehaviour
         yield return new WaitForSeconds(timeBetweenShoot);
 
         canLevitatingShoot = true;
+    }
+
+    public void ChargingBubbleTrigger()
+    {
+        isChargingBubble = true;
     }
 }
